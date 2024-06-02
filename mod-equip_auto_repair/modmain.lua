@@ -3,9 +3,9 @@ GLOBAL.setmetatable(env,{__index=function(t,k) return GLOBAL.rawget(GLOBAL,k) en
 
 -- logger
 local ModLogKey = "lijr auto_equip_repair"
-local DebugEnable = false
-local InfoEnable = false
-local ErrorEnable = true
+local DebugEnable = GetModConfigData("LogDebugEnable")
+local InfoEnable = GetModConfigData("LogInfoEnable")
+local ErrorEnable = GetModConfigData("LogErrorEnable")
 
 local function LogDebug(...)
     if DebugEnable then

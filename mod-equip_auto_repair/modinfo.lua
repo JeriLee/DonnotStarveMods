@@ -170,7 +170,7 @@ local TXT_STATIC = {
 	["customSlot"] = Adaptive("custom the slot order","自定义装备槽位置","自定義裝備槽位置"),
 	["equipSetting"] = Adaptive("enable equip Settings","装备是否开启设置","裝備是否開啓設置"),
 
-	["debugSetting"] = Adaptive("Debug Setting(If not necessary, do not modify)","调试设置(请勿修改)","調試設置(請勿修改)"),
+	["debugSetting"] = Adaptive("Debug Setting(If not necessary, do not modify)","调试设置(请勿开启)","調試設置(請勿開啓)"),
 
 	["LogDebugEnable"] = Adaptive("LogDebugEnable","LogDebugEnable","LogDebugEnable"),
 	["LogInfoEnable"] = Adaptive("LogInfoEnable","LogInfoEnable","LogInfoEnable"),
@@ -532,5 +532,35 @@ configuration_options = {
 		hover = TXT_STATIC["walrushat"] .. TXT_STATIC["enableOrNot"],
 		options = Options,
 		default = true,
+	},
+
+	-- debug Setting
+	{
+		name = TXT_STATIC["debugSetting"],
+		label = TXT_STATIC["debugSetting"], 
+		options = {{description = "", data = 0}},
+		default = 0,
+		tags = {"ignore"},
+	},
+	{
+		name = "LogDebugEnable",
+		label = TXT_STATIC["LogDebugEnable"],
+		hover = TXT_STATIC["LogDebugEnable"],
+		options = Options,
+		default = false,
+	},
+	{
+		name = "LogInfoEnable",
+		label = TXT_STATIC["LogInfoEnable"],
+		hover = TXT_STATIC["LogInfoEnable"],
+		options = Options,
+		default = false,
+	},
+	{
+		name = "LogErrorEnable",
+		label = TXT_STATIC["LogErrorEnable"],
+		hover = TXT_STATIC["LogErrorEnable"],
+		options = Options,
+		default = false,
 	},
 }
