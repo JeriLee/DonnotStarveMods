@@ -32,6 +32,16 @@ end
 local isFreezerEnable = IsEnabled("Freezer")
 local isAutoOpen = IsEnabled("SlotAutoOpen")
 
+-- custom slot roder
+local CustomOrderType = {
+    hand = "hand",
+    backpack = "backpack",
+    bodyArmor = "bodyArmor",
+    bodyCloth = "bodyCloth",
+    amulet = "amulet",
+    hat = "hat",
+}
+
 local slot_order = {}
 local function initSlotOrderTable(configName)
     local tmp = GetModConfigData(configName)
@@ -41,21 +51,18 @@ local function initSlotOrderTable(configName)
     end
 end
 
--- initSlotOrderTable("hand")
--- initSlotOrderTable("backpack")
--- initSlotOrderTable("hat")
--- initSlotOrderTable("bodyCloth")
--- initSlotOrderTable("amulet")
--- initSlotOrderTable("bodyArmor")
+initSlotOrderTable("hand")
+initSlotOrderTable("backpack")
+initSlotOrderTable("hat")
+initSlotOrderTable("bodyCloth")
+initSlotOrderTable("amulet")
+initSlotOrderTable("bodyArmor")
 
-local CustomOrderType = {
-    hand = "hand",
-    backpack = "backpack",
-    bodyArmor = "bodyArmor",
-    bodyCloth = "bodyCloth",
-    amulet = "amulet",
-    hat = "hat",
-}
+if DebugEnable then
+    for k, v in pairs(CustomOrderType) do
+        LogDebug("config sort order", k, v, slot_order[v])
+    end
+end
 
 -- local config
 -- local lunarRepair = "forgerepair_" .. FORGEMATERIALS.LUNARPLANT
@@ -313,6 +320,27 @@ item_config.goggleshat = item_config.beefalohat
 item_config.deserthat = item_config.beefalohat
 item_config.walterhat = item_config.beefalohat
 
+if DebugEnable then
+    LogDebug("beefalohat custom_order", item_config.beefalohat.custom_order)
+end
+
+-- some function 
+
+local function getSlotPos(item)
+    return item.posh == nil and Vector3(0,   32 + 4,  0) or Vector3(0, 2, 0)
+end
+
+local function getPos(item)
+    local useX = item.pos.x
+    local useY = item.posh ~= nil and item.posh or item.pos.y
+    local useZ = item.pos.z
+
+    if item.custom_order ~= nil then
+        useX = 53*(item.custom_order-1)
+    end
+    return  Vector3(useX, useY, useZ)
+end
+
 -- containers
 local containers = require("containers")
 
@@ -330,7 +358,7 @@ for perfab, item in pairs(item_config) do
             },
             animbank = item.animbank ~= nil and item.animbank or "ui_cookpot_1x2",
             animbuild = item.animbuild ~= nil and item.animbuild or "ui_cookpot_1x2",
-            pos = Vector3(item.pos.x, item.posh ~= nil and item.posh or item.pos.y, item.pos.z),
+            pos = getPos(item),
         },
         usespecificslotsforitems = true,
         type = "hand_inv",
@@ -515,13 +543,13 @@ end
 
 local function loadRuntimeConfig(inst)
     local itemConfig = item_config[inst.prefab]
-    if itemConfig.custom_order ~= nil then
-        LogDebug("fixOrder", inst.name, itemConfig.custom_order, itemConfig.custom_order-1)
-        local order = itemConfig.custom_order - 1
-        local oldPos = containers.params.yellowamulet_container.widget.pos
-        containers.params.yellowamulet_container.widget.pos = itemConfig.posh ~= nil and Vector3(53*order, itemConfig.posh, oldPos.z) or Vector3(53*order, oldPos.y, oldPos.z)
-        return
-    end
+    -- if itemConfig.custom_order ~= nil then
+    --     LogDebug("fixOrder", inst.name, itemConfig.custom_order, itemConfig.custom_order-1)
+    --     local order = itemConfig.custom_order - 1
+    --     local oldPos = containers.params.yellowamulet_container.widget.pos
+    --     containers.params.yellowamulet_container.widget.pos = itemConfig.posh ~= nil and Vector3(53*order, itemConfig.posh, oldPos.z) or Vector3(53*order, oldPos.y, oldPos.z)
+    --     return
+    -- end
     if itemConfig.could_pos_neck ~= nil and GLOBAL.EQUIPSLOTS.NECK ~= nil then
         containers.params[inst.prefab .. "_container"].widget.pos = itemConfig.posh ~= nil and Vector3(equip_pos.neck.x, itemConfig.posh, equip_pos.neck.z) or equip_pos.neck
     end

@@ -10,7 +10,7 @@ local NAME_MOD = Adaptive (
 
 local DESC_MOD = Adaptive(
 [[
-	Equipped with automatic repair, suitable for five-compartment backpack mod
+	Equipped with automatic repair, suitable for five-compartment backpack mod,Suitable for six equipment slots
 	Currently only items are supported:
 	Amulet (Yellow Amulet,Orange Amulet)
 	Clothing (Bearskin vest, cool summer dress, floppy vest, Breathable vest, houndtooth vest, raincoat)
@@ -23,11 +23,11 @@ local DESC_MOD = Adaptive(
 	To be added:
 	Top hat, Magician hat
 	
-	Version :2.0
+	Version :2.1
 ]],
 [[
 	禁止搬运！！！
-	装备自动修理,适用于五格背包mod
+	装备自动修理,适用于五格背包mod,适配六格背包
 	已经增加燃料格子是否自动打开开关
 	当前仅支持道具:
 		护符(魔光护符,懒人护符)
@@ -42,12 +42,12 @@ local DESC_MOD = Adaptive(
 		高礼帽,魔术师帽
 		眼面具
 
-	版本:2.0
+	版本:2.1
 ]]
 ,
 [[
 	禁止搬運！！！
-	裝備自動修理,適用於五格揹包mod
+	裝備自動修理,適用於五格揹包mod,適配六格揹包
 	當前僅支持道具:
 	護符(魔光護符,懶人護符)
 	服裝(熊皮背心,清涼夏裝,鬆軟背心,透氣背心,犬牙背心,雨衣)
@@ -60,13 +60,13 @@ local DESC_MOD = Adaptive(
 	待補充:
 	高禮帽,魔術師帽
 	
-	版本:2.0
+	版本:2.1
 ]])
 
 name = NAME_MOD
 description = DESC_MOD
 author = "Larkin" 
-version = "2.0"
+version = "2.1"
 
 forumthread = "" 
 
@@ -167,7 +167,7 @@ local TXT_STATIC = {
 	["amulet"] = Adaptive("custom the amulet slot order","护符位置自定义","护符位置自定义"),
 
 	["specialFunction"] = Adaptive("Special function","特殊功能","特殊功能"),
-	["customSlot"] = Adaptive("custom the slot order","自定义装备槽位置","自定義裝備槽位置"),
+	["customSlot"] = Adaptive("custom the slot order","自定义装备槽位置(适配六格背包)","自定義裝備槽位置(適配六格揹包)"),
 	["equipSetting"] = Adaptive("enable equip Settings","装备是否开启设置","裝備是否開啓設置"),
 
 	["debugSetting"] = Adaptive("Debug Setting(If not necessary, do not modify)","调试设置(请勿开启)","調試設置(請勿開啓)"),
@@ -221,57 +221,56 @@ configuration_options = {
 		default = true,
 	},
 
-	-- {
-	-- 	name = TXT_STATIC["customSlot"],
-	-- 	label = TXT_STATIC["customSlot"], 
-	-- 	options = {{description = "", data = 0}},
-	-- 	default = 0,
-	-- 	tags = {"ignore"},
-	-- },
+	{
+		name = TXT_STATIC["customSlot"],
+		label = TXT_STATIC["customSlot"], 
+		options = {{description = "", data = 0}},
+		default = 0,
+		tags = {"ignore"},
+	},
 
-	-- {
-	-- 	name = "hand",
-	-- 	label = TXT_STATIC["hand"],
-	-- 	hover = TXT_STATIC["SLOT_CUSTOM_DESC"],
-	-- 	options = SlotOptions,
-	-- 	default = -1,
-	-- },
-	-- {
-	-- 	name = "backpack",
-	-- 	label = TXT_STATIC["backpack"],
-	-- 	hover = TXT_STATIC["SLOT_CUSTOM_DESC"],
-	-- 	options = SlotOptions,
-	-- 	default = -1,
-	-- },
-	-- {
-	-- 	name = "hat",
-	-- 	label = TXT_STATIC["hat"],
-	-- 	hover = TXT_STATIC["SLOT_CUSTOM_DESC"],
-	-- 	options = SlotOptions,
-	-- 	default = -1,
-	-- },
-	-- {
-	-- 	name = "bodyCloth",
-	-- 	label = TXT_STATIC["bodyCloth"],
-	-- 	hover = TXT_STATIC["SLOT_CUSTOM_DESC"],
-	-- 	options = SlotOptions,
-	-- 	default = -1,
-	-- },
-	-- {
-	-- 	name = "amulet",
-	-- 	label = TXT_STATIC["amulet"],
-	-- 	hover = TXT_STATIC["SLOT_CUSTOM_DESC"],
-	-- 	options = SlotOptions,
-	-- 	default = -1,
-	-- },
-	-- {
-	-- 	name = "bodyArmor",
-	-- 	label = TXT_STATIC["bodyArmor"],
-	-- 	hover = TXT_STATIC["SLOT_CUSTOM_DESC"],
-	-- 	options = SlotOptions,
-	-- 	default = -1,
-	-- },
-
+	{
+		name = "hand",
+		label = TXT_STATIC["hand"],
+		hover = TXT_STATIC["SLOT_CUSTOM_DESC"],
+		options = SlotOptions,
+		default = -1,
+	},
+	{
+		name = "backpack",
+		label = TXT_STATIC["backpack"],
+		hover = TXT_STATIC["SLOT_CUSTOM_DESC"],
+		options = SlotOptions,
+		default = -1,
+	},
+	{
+		name = "bodyArmor",
+		label = TXT_STATIC["bodyArmor"],
+		hover = TXT_STATIC["SLOT_CUSTOM_DESC"],
+		options = SlotOptions,
+		default = -1,
+	},
+	{
+		name = "bodyCloth",
+		label = TXT_STATIC["bodyCloth"],
+		hover = TXT_STATIC["SLOT_CUSTOM_DESC"],
+		options = SlotOptions,
+		default = -1,
+	},
+	{
+		name = "amulet",
+		label = TXT_STATIC["amulet"],
+		hover = TXT_STATIC["SLOT_CUSTOM_DESC"],
+		options = SlotOptions,
+		default = -1,
+	},
+	{
+		name = "hat",
+		label = TXT_STATIC["hat"],
+		hover = TXT_STATIC["SLOT_CUSTOM_DESC"],
+		options = SlotOptions,
+		default = -1,
+	},
 	{
 		name = TXT_STATIC["equipSetting"],
 		label = TXT_STATIC["equipSetting"], 
